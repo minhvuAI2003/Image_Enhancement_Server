@@ -46,7 +46,7 @@ class NoiseCNN(nn.Module):
 def load_cnn_models():
     models = {}
     cnn_model_paths = {
-        "gaussian_denoise": "CNN_models/oise.pth",
+        "gaussian_denoise": "CNN_models/noise.pth",
         "derain": "CNN_models/rain.pth",
         "single_image_deblur": "CNN_models/blur.pth"
     }
