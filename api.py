@@ -262,4 +262,4 @@ async def auto_detect_and_process(file: UploadFile = File(...)):
 if __name__ == "__main__":
 
     # Run the FastAPI app
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000) # có thể thay đổi cổng bất kỳ

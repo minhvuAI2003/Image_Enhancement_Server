@@ -8,8 +8,7 @@ pip install -r requirements.txt
 python download_model.py
 ```
 ## 3. Khởi Động Server
-Chạy server bằng lệnh:
+Chạy server trên cổng 8000 bằng lệnh:
 ```bash
 python api.py
 ```
-Sau khi chạy xong, địa chỉ của Server sẽ là https://localhost:8000
