@@ -1,4 +1,4 @@
-## 0. Tạo và Kích Hoạt Môi Trường Ảo (Khuyến nghị)
+## Tạo và Kích Hoạt Môi Trường Ảo (Khuyến nghị)
 Nên sử dụng môi trường ảo để quản lý dependencies:
 ```bash
 python -m venv .venv
