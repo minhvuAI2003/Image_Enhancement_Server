@@ -46,7 +46,7 @@ class NoiseCNN(nn.Module):
 def load_cnn_models():
     models = {}
     cnn_model_paths = {
-        "gaussian_denoise": "CNN_models/noise.pth",
+        "gaussian_denoise": "CNN_models/oise.pth",
         "derain": "CNN_models/rain.pth",
         "single_image_deblur": "CNN_models/blur.pth"
     }
@@ -212,7 +212,7 @@ async def auto_detect_and_process(file: UploadFile = File(...)):
         model_pairs = {
             "gaussian_denoise": ["gaussian_denoise", "real_denoise"],
             "motion_deblur": ["motion_deblur", "single_image_deblur"],
-            # "single_image_deblur": ["motion_deblur", "single_image_deblur"]
+            "single_image_deblur": ["motion_deblur", "single_image_deblur"]
         }
         
         if detected_noise_type not in model_pairs:
@@ -233,12 +233,12 @@ async def auto_detect_and_process(file: UploadFile = File(...)):
             ssim = float(result.headers["X-SSIM"])
             
             if best_metrics is None or (psnr < best_metrics["psnr"] and 
-                                      psnr < 40 ):
+                                      psnr < 40):
                 best_result = result
                 best_metrics = {"psnr": psnr, "ssim": ssim}
                 best_model = model_name
         
-        if best_metrics and best_metrics["psnr"] > 40 and b:
+        if best_metrics and best_metrics["psnr"] > 40:
             return {
                 "status": "no_noise_detected",
                 "message": "No significant noise detected in the image"
@@ -258,17 +258,8 @@ async def auto_detect_and_process(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error in auto detection and processing: {str(e)}")
 
-# === Ngrok setup ===
-def setup_ngrok():
-    # Thay YOUR_AUTH_TOKEN bằng token của bạn từ https://dashboard.ngrok.com/get-started/your-authtoken
-    conf.get_default().auth_token = "2p1nq5rK3ywq2n3HvcTGVDgtUGb_WPjQ2a39CcdETaTn4jFq"
-    public_url = ngrok.connect(8000)
-    print(f"\\n=== Ngrok Public URL ===")
-    print(f"Public URL: {public_url}")
-    return public_url
 
 if __name__ == "__main__":
-    # Setup ngrok
-    public_url = setup_ngrok()
+
     # Run the FastAPI app
     uvicorn.run(app, host="0.0.0.0", port=8000)
