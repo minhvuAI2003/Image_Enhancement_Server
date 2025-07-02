@@ -12,3 +12,4 @@ Chạy server bằng lệnh:
 ```bash
 python api.py
 ```
+Sau khi chạy xong, địa chỉ của Server sẽ là https://localhost:8000
